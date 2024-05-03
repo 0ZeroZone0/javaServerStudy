@@ -3,6 +3,7 @@ package com.group.libraryapp.controller.user;
 import com.group.libraryapp.domain.user.Fruit;
 import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
+import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -59,6 +60,41 @@ public class UserController {
       return new UserResponse(id, name, age);
     });
   }
+
+  @PutMapping("/user")
+  public void updateUser(@RequestBody UserUpdateRequest userUpdateRequest){
+    //조회
+    String readSql = "SELECT * FROM user WHERE id = ?";
+    //해당 id로 조회된 데이터 있는지 확인
+    boolean isUserNotExist = jdbcTemplate.query(readSql, (rs, rowNum) -> 0, userUpdateRequest.getId()).isEmpty();
+    if(isUserNotExist){
+      throw new IllegalArgumentException();
+    }
+
+    //업데이트
+    String sql = "UPDATE user SET name = ? WHERE id = ?";
+    jdbcTemplate.update(sql, userUpdateRequest.getName(), userUpdateRequest.getId());
+  }
+
+  @DeleteMapping("/user")
+  public void deleteUser(@RequestParam String name){
+    //조회
+    String readSql = "SELECT * FROM user WHERE name = ?";
+    //해당 name 로 조회된 데이터 있는지 확인
+    boolean isUserNotExist = jdbcTemplate.query(readSql, (rs, rowNum) -> 0, name).isEmpty();
+    if(isUserNotExist){
+      throw new IllegalArgumentException();
+    }
+
+    String sql = "DELETE FROM user WHERE name = ?";
+    jdbcTemplate.update(sql, name);
+  }
+
+  @GetMapping("/user/error-test")
+  public void errorTest(){
+    throw new IllegalArgumentException();
+  }
+
 
 
 }
