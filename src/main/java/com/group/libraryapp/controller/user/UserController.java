@@ -3,18 +3,21 @@ package com.group.libraryapp.controller.user;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
+import com.group.libraryapp.service.fruit.FruitService;
 import com.group.libraryapp.service.user.UserService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class UserController {
-
-  //private final List<User> users = new ArrayList<>();
   private final UserService userService ;
-  public UserController(UserService userService){ // JDBC 템플릿을 받아서 생성자를 만듦.
+  private final FruitService fruitService;
+
+  public UserController(UserService userService, @Qualifier("main") FruitService fruitService){
     this.userService = userService;
+    this.fruitService = fruitService;
   }
 
   @PostMapping("/user") // POST /user
