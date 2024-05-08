@@ -3,42 +3,42 @@ package com.group.libraryapp.service.user;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
-import com.group.libraryapp.repository.user.UserRepository;
+import com.group.libraryapp.repository.user.UserJdbcRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserServiceV1 {
 
-    private final UserRepository userRepository;
+    private final UserJdbcRepository userJdbcRepository;
 
-    public UserService(UserRepository userRepository ){
-        this.userRepository = userRepository;
+    public UserServiceV1(UserJdbcRepository userJdbcRepository){
+        this.userJdbcRepository = userJdbcRepository;
     }
 
     public void saveUser(UserCreateRequest userCreateRequest){
-        userRepository.saveUser(userCreateRequest.getName(), userCreateRequest.getAge());
+        userJdbcRepository.saveUser(userCreateRequest.getName(), userCreateRequest.getAge());
     }
 
     public List<UserResponse> getUsers(){
-        return userRepository.getUsers();
+        return userJdbcRepository.getUsers();
     }
 
     public void updateUser(UserUpdateRequest userUpdateRequest){
-        if(userRepository.isUserNotExist(userUpdateRequest.getId())){
+        if(userJdbcRepository.isUserNotExist(userUpdateRequest.getId())){
             throw new IllegalArgumentException();
         }
 
-        userRepository.updateUserName(userUpdateRequest.getName(), userUpdateRequest.getId());
+        userJdbcRepository.updateUserName(userUpdateRequest.getName(), userUpdateRequest.getId());
     }
 
     public void deleteUser(String name){
-        if(userRepository.isUserNotExist(name)){
+        if(userJdbcRepository.isUserNotExist(name)){
             throw new IllegalArgumentException();
         }
 
-        userRepository.deleteUser(name);
+        userJdbcRepository.deleteUser(name);
     }
 
 
