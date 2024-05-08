@@ -19,6 +19,9 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
