@@ -1,13 +1,19 @@
 package com.group.libraryapp.domain.user;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class User {
 
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id = null;
+  @Column(nullable = false, length = 20) //name varchar(20)
   private String name;
   private Integer age;
 
+  protected User(){}
 
   public User(String name, Integer age) {
     if (name == null || name.isBlank()) {
