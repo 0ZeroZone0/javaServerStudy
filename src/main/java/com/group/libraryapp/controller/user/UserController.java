@@ -4,6 +4,7 @@ import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
 import com.group.libraryapp.service.fruit.FruitService;
+import com.group.libraryapp.service.fruit.FruitServiceClass;
 import com.group.libraryapp.service.user.UserServiceV1;
 import com.group.libraryapp.service.user.UserServiceV2;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,9 +15,9 @@ import java.util.List;
 @RestController
 public class UserController {
   private final UserServiceV2 userService;
-  private final FruitService fruitService;
+  private final FruitServiceClass fruitService;
 
-  public UserController(UserServiceV2 userService, @Qualifier("main") FruitService fruitService){
+  public UserController(UserServiceV2 userService, @Qualifier("main") FruitServiceClass fruitService){
     this.userService = userService;
     this.fruitService = fruitService;
   }
