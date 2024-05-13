@@ -43,4 +43,17 @@ public class User {
   public void updateName(String name){
     this.name = name;
   }
+
+  public void loanBook(String bookName){
+    this.userLoanHistories.add(new UserLoanHistory(this, bookName));
+  }
+
+  public void returnBook(String bookName){
+    UserLoanHistory targetHistory = this.userLoanHistories.stream()
+            .filter(history -> history.getBookName().equals(bookName)) //파라매터로 받은 bookName하고 같은지 보고
+            .findFirst()  //첫번째로 걸리는걸 찾아서
+            .orElseThrow(IllegalArgumentException::new); //혹시 갖고있는 유저가 없으면 익셉션 처리
+    targetHistory.doReturn();
+  }
+
 }
