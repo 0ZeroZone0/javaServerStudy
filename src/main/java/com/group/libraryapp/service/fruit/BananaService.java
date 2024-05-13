@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("main")
-public class BananaService implements FruitService{
+public class BananaService implements FruitServiceClass{
 }
