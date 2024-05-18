@@ -1,12 +1,12 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.6'
+	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
@@ -23,6 +23,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	runtimeOnly 'org.springframework.boot:spring-boot-properties-migrator'
 }
 
 tasks.named('test') {
